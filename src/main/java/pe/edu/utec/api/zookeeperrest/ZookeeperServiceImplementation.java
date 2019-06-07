@@ -77,13 +77,18 @@ public class ZookeeperServiceImplementation implements ZookeeperService {
 
   public HashMap<String, String> getZNodesData(String path, boolean watchFlag)
           throws KeeperException, InterruptedException {
-    List<String> zNodes = zkeeper.getChildren(path, watchFlag);
-    HashMap<String, String> zNodesData = new HashMap<String, String>();
-    for (String zNode : zNodes) {
-      String data = (String) getZNodeData(path + "/" + zNode, true);
-      zNodesData.put(zNode, data);
-    }
+    try {
+      List<String> zNodes = zkeeper.getChildren(path, watchFlag);
+      HashMap<String, String> zNodesData = new HashMap<String, String>();
+      for (String zNode : zNodes) {
+        String data = (String) getZNodeData(path + "/" + zNode, true);
+        zNodesData.put(zNode, data);
+      }
+      return zNodesData;
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
 
-    return zNodesData;
+    }
+    return null;
   }
 }
