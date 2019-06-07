@@ -18,23 +18,24 @@ public class ZookeeperController {
 
   @RequestMapping("/")
   public String helloZookeeper() {
-    return "Hola";
+    return "Welcome to Zookeeper";
   }
 
   @RequestMapping(value = "/getznodedata", method = RequestMethod.GET)
-  public String getZNodeData() {
-    return (String) zookeeperImpl.getZNodeData("/config/myapplication/name", true);
+  public String getZNodeData(final @RequestParam("node") String node) {
+    return (String) zookeeperImpl.getZNodeData(node, true);
   }
 
   @RequestMapping(value = "/getchildren", method = RequestMethod.GET)
-  public List<String> getChildren() throws KeeperException, InterruptedException {
-    return zookeeperImpl.getChildren("/config/myapplication", true);
+  public List<String> getChildren(final @RequestParam("children") String children)
+          throws KeeperException, InterruptedException {
+    return zookeeperImpl.getChildren(children, true);
   }
 
-  @RequestMapping(value = "/getznodesdata", method = RequestMethod.GET)
-  public HashMap<String, String> getznodesdata(final @RequestParam("node") String node)
+  @RequestMapping(value = "/getchildrenvalue", method = RequestMethod.GET)
+  public HashMap<String, String> getChildrenValue(final @RequestParam("node") String node)
           throws KeeperException, InterruptedException {
-    return zookeeperImpl.getZNodesData(node, true);
+    return zookeeperImpl.getChildrenValue(node, true);
 
   }
 

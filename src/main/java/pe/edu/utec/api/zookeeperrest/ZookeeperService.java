@@ -17,6 +17,6 @@ public interface ZookeeperService {
   public List<String> getChildren(String path, boolean watchFlag)
           throws KeeperException, InterruptedException;
 
-  public HashMap<String, String> getZNodesData(String path, boolean wathFlag)
+  public HashMap<String, String> getChildrenValue(String path, boolean wathFlag)
           throws KeeperException, InterruptedException;;
 }
